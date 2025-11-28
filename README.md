@@ -36,12 +36,14 @@ Stellar Vision V1 is an advanced assistive technology device designed for visual
 Stellar_Vision_V1/
 ├── Firmware/
 │   ├── releases/
-│   │   └── firmware_v2.1/      # Latest firmware release
-│   └── latest.json            # Firmware update information
+│   │   └── firmwarevx.x/
+|   |          └── firmware.bin         # Latest firmware release
+|   |          └── firmware.json      
+│   └── latest.json                     # Firmware update information
 ├── Manual Sheet/
 │   ├── Stellar Vision V1 - MANUAL.pdf
 │   └── Stellar_Vision_V1-MANUAL.md
-├── LICENCE.txt               # PolyForm Noncommercial 1.0.0
+├── LICENCE.txt                         # PolyForm Noncommercial 1.0.0
 └── README.md
 ```
 
