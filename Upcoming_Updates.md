@@ -12,8 +12,6 @@
 
  Below is a **much simpler, cleaner, minimal version** while keeping a professional tone.
 
----
-
 ### **Rubber-Dome Key Switch Upgrade**
 
 The next hardware revision will use **rubber-dome (TV-remote style) key switches** to improve comfort and typing accuracy.
@@ -25,7 +23,9 @@ The next hardware revision will use **rubber-dome (TV-remote style) key switches
 * **Consistent tactile feedback** to help users confirm each input.
 * **Long lifespan** (1–5 million presses).
 * **Slim design**, suitable for compact assistive devices.
-* 
+
+  ---
+
 ### 1. **mmWave Sensor for Person Detection**
 - **Sensor**: RCWL-9196 or LD2410 mmWave radar
 - **Purpose**: Detect human presence without cameras
