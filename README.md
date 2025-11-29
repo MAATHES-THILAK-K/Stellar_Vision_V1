@@ -34,17 +34,56 @@ Stellar Vision V1 is an advanced assistive technology device designed for visual
 
 ```
 Stellar_Vision_V1/
+├── 3D Models/
+│   ├── F3D/
+│   │   └── Stellar Vision V2 v10.f3d
+│   ├── Images/
+│   │   ├── BODY.png
+│   │   ├── ISOMETRIC.png
+│   │   ├── LID_FLIPPED.png
+│   │   └── LID_TOPVIEW.png
+│   └── Printables/
+│       ├── BODY.stl
+│       └── LID.stl
+│
+├── Circuits/
+│   ├── Connections.md
+│   ├── Stellar Vision V1 bom.html
+│   └── Stellar Vision V1 pdf.pdf
+│
 ├── Firmware/
 │   ├── releases/
 │   │   └── firmwarevx.x/
-|   |          └── firmware.bin         # Latest firmware release
-|   |          └── firmware.json      
-│   └── latest.json                     # Firmware update information
+│   │       ├── firmware.bin
+│   │       └── firmware.json
+│   └── latest.json
+│
 ├── Manual Sheet/
 │   ├── Stellar Vision V1 - MANUAL.pdf
 │   └── Stellar_Vision_V1-MANUAL.md
-├── LICENCE.txt                         # PolyForm Noncommercial 1.0.0
-└── README.md
+│
+├── SD_CARD Files/
+│   ├── Alphabets/
+│   ├── AudioFiles/
+│   ├── TACTI_VISION_WAV/
+│   └── Expansion_Guide.md
+│
+├── src/
+│   ├── Latest_Firmware/
+│   │   ├── Digispark/
+│   │   │   ├── Flash.md
+│   │   │   └── Stellar_Vision_Digispark.ino
+│   │   └── ESP32C6/
+│   │       ├── firmware.ino
+│   │       └── partitions.csv
+│   └── configuration.md
+│
+├── Build_Instruction.md
+├── Upcoming_Updates.md
+├── README.md
+└── LICENCE.txt
+
+
 ```
 
 ## 🚀 Getting Started
