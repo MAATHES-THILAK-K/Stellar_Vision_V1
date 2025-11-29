@@ -36,6 +36,7 @@
 ### 4. **ESP32-S3 Migration**
 - **Processor**: ESP32-S3 (Dual-core Xtensa LX7)
 - **Advantages**:
+  -Eliminate Digispark (Full USB HID)  
   - **Core 0**: Handle I2S audio, BLE, WiFi
   - **Core 1**: Handle I2C sensors, GPIO, braille display
   - Eliminate I2C/I2S conflicts
