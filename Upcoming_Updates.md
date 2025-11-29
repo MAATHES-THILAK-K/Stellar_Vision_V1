@@ -6,7 +6,10 @@
   - Quick navigation through long content
   - Chapter markers for audiobooks
   - Resume from last position
-
+### **ESP IDF Migration**
+  - To Make more efficient firmware
+  - To deploy as a Product that is affordable for everyone
+ 
 ### 1. **mmWave Sensor for Person Detection**
 - **Sensor**: RCWL-9196 or LD2410 mmWave radar
 - **Purpose**: Detect human presence without cameras
