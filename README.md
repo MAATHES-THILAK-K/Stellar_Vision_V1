@@ -143,7 +143,7 @@ This project is licensed under the **PolyForm Noncommercial License 1.0.0** - se
 
 ## 👨‍💻 Author
 
-**Maathhes Thilak K**  
+**Maathes Thilak K**  
 Bachelor of Engineering – ECE  
 Madras Institute of Technology (MIT), Anna University, Chennai
 
