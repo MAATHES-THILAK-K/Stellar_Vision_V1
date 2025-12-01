@@ -4144,6 +4144,17 @@ void handleUpButton() {
         else selectedModeIndex = NUM_MODE_OPTIONS - 1;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
+        switch(selectedModeIndex) {
+        case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+        case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+        case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+        case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+        case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+        case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+        case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break; 
+        case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+        case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+        }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex > 0) {
           currentFileIndex--;
@@ -4155,6 +4166,14 @@ void handleUpButton() {
         else selectedShortcutIndex = NUM_SHORTCUTS - 1;
         Serial.print(">> ");
         Serial.println(shortcutNames[selectedShortcutIndex]);
+    switch(selectedShortcutIndex) {
+    case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
+    case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
+    case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
+    case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
+    case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
+    case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
+  }
       }
       if (currentAppMode == AUDIO_PLAYER_MODE) {
         if (audioPlaying) {
@@ -4184,6 +4203,17 @@ void handleDownButton() {
         else selectedModeIndex = 0;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
+         switch(selectedModeIndex) {
+         case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+         case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+         case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+         case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+         case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+         case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+         case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
+         case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+         case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+  }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex < sdFiles.size() - 1) {
           currentFileIndex++;
@@ -4195,6 +4225,14 @@ void handleDownButton() {
         else selectedShortcutIndex = 0;
         Serial.print(">> ");
         Serial.println(shortcutNames[selectedShortcutIndex]);
+         switch(selectedShortcutIndex) {
+         case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
+         case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
+         case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
+         case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
+         case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
+         case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
+  }
       }
       if (currentAppMode == AUDIO_PLAYER_MODE) {
         if (audioPlaying) {
