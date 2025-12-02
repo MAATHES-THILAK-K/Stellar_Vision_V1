@@ -1,5 +1,5 @@
 {
-  "latest_version": "v3.1",
-  "description": "Removes Unicode braille characters from the serial monitor output for cleaner and more compatible logging.",
-  "url": "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/releases/firmware_v3.1/firmware.bin"
+  "latest_version": "v3.2",
+  "description": "Bug fix in One Hand Mode",
+  "url": "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/releases/firmware_v3.2/firmware.bin"
 }
