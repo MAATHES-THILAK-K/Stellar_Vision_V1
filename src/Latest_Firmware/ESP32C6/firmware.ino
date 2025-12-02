@@ -103,10 +103,6 @@ const int PCF_DOWN_PIN = 13;
 
 // Tilt detection thresholds
 #define TILT_THRESHOLD 3.0
-#define LONG_UP_COUNT 40
-
-// MPU6050 state variables
-int upCount = 0;
 unsigned long lastTiltTime = 0;
 const unsigned long TILT_DEBOUNCE = 450;
 
@@ -3661,7 +3657,6 @@ void setup() {
 
 void processMPU6050Gestures() {
   if (!gestureModeActive) {
-    upCount = 0;
     return;
   }
   updateActivityTimer();
@@ -3675,7 +3670,7 @@ void processMPU6050Gestures() {
   unsigned long currentTime = millis();
 
   // RIGHT tilt = SELECT (Pin 12)
-  if (ax > TILT_THRESHOLD) {
+  if (ay > TILT_THRESHOLD) {
     if (currentTime - lastTiltTime > TILT_DEBOUNCE) {
       //Serial.println("[GESTURE] RIGHT -> SELECT");
       //Serial.println("RIGHT");
@@ -3719,11 +3714,10 @@ void processMPU6050Gestures() {
 
       lastTiltTime = currentTime;
     }
-    upCount = 0;
   }
 
   // LEFT tilt = PREVIOUS (Pin 10)
-  else if (ax < -TILT_THRESHOLD) {
+  else if (ay < -TILT_THRESHOLD) {
     if (currentTime - lastTiltTime > TILT_DEBOUNCE) {
       //Serial.println("[GESTURE] LEFT -> PREVIOUS");
       //Serial.println("LEFT");
@@ -3750,12 +3744,10 @@ void processMPU6050Gestures() {
 
       lastTiltTime = currentTime;
     }
-    upCount = 0;
   }
   // DOWN tilt = DOWN navigation (Pin 13)
-  else if (ay < -TILT_THRESHOLD) {
+  else if (ax > TILT_THRESHOLD) {
     if (currentTime - lastTiltTime > TILT_DEBOUNCE) {
-      //Serial.println("[GESTURE] DOWN");
       //Serial.println("DOWN");
       vibe(0.08);
 
@@ -3764,6 +3756,17 @@ void processMPU6050Gestures() {
         else selectedModeIndex = 0;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
+        switch (selectedModeIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+          case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
+          case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+          case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+        }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex < sdFiles.size() - 1) {
           currentFileIndex++;
@@ -3774,21 +3777,10 @@ void processMPU6050Gestures() {
 
       lastTiltTime = currentTime;
     }
-    upCount = 0;
   }
-  // UP tilt = UP navigation (Pin 11) or LONG UP to disable gesture mode
-  else if (ay > TILT_THRESHOLD) {
-    upCount++;
-
-    if (upCount >= LONG_UP_COUNT) {
-      //Serial.println("[GESTURE] LONG UP -> Disabling One-Hand Mode");
-      Serial.println("LONG UP -> Disabling One-Hand Mode");
-      gestureModeActive = false;
-      playWAV("/TACTI_VISION_WAV/ONE_HAND_MODE.wav");
-      vibe(0.3);
-      upCount = 0;
-      lastTiltTime = currentTime;
-    } else if (currentTime - lastTiltTime > TILT_DEBOUNCE) {
+  // UP tilt = UP navigation (Pin 11) - REMOVED AUTO-DISABLE FEATURE
+  else if (ax < -TILT_THRESHOLD) {
+    if (currentTime - lastTiltTime > TILT_DEBOUNCE) {
       //Serial.println("UP");
       vibe(0.08);
 
@@ -3797,6 +3789,17 @@ void processMPU6050Gestures() {
         else selectedModeIndex = NUM_MODE_OPTIONS - 1;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
+        switch (selectedModeIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+          case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
+          case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+          case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+        }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex > 0) {
           currentFileIndex--;
@@ -3807,8 +3810,6 @@ void processMPU6050Gestures() {
 
       lastTiltTime = currentTime;
     }
-  } else {
-    upCount = 0;
   }
 }
 
