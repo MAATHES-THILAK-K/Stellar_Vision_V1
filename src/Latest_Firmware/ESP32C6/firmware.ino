@@ -24,7 +24,7 @@
 Adafruit_MPU6050 mpu;
 
 // ================== OTA UPDATE CONFIG ==================
-#define CURRENT_FIRMWARE_VERSION "v3.0"
+#define CURRENT_FIRMWARE_VERSION "V3.1"
 const char* latestInfoURL = "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/latest.json";
 
 // Calibration Offsets - Calibrate them based on your MPU6050
@@ -76,10 +76,10 @@ const int NUM_SHORTCUTS = sizeof(shortcutNames) / sizeof(shortcutNames[0]);
 bool hidKeyboardEnabled = false;
 bool hidInitialized = false;
 
-const char* twilio_account_sid = "xxxxxxxxxxxxxxxxxxxx";
-const char* twilio_auth_token = "xxxxxxxxxxxxxxxxxxxxx";
-const char* twilio_from_number = "xxxxxxxxxxxxxxxxxxxxxxx";
-const char* twilio_to_number = "xxxxxxxxxxxxxxxxxxxx";
+const char* twilio_account_sid = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+const char* twilio_auth_token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+const char* twilio_from_number = "xxxxxxxxxxx";
+const char* twilio_to_number = "xxxxxxxxxxxxx";
 
 bool sosTriggered = false;
 unsigned long lastSOSTime = 0;
@@ -313,12 +313,12 @@ void setHIDKeyboardMode(bool enable) {
 }
 
 // OCR.space API credentials
-String ocrApiKey = "K87285088988957";
+String ocrApiKey = "xxxxxxxxxxxxxxxx";
 const char* ocrHost = "api.ocr.space";
 const int ocrPort = 443;
 
 // ===== VoiceRSS TTS API =====
-#define VOICERSS_API_KEY "xxxxxxxxxxxxxxx"
+#define VOICERSS_API_KEY "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 #define VOICERSS_URL "http://api.voicerss.org/"
 
 // Notification ring buffer
@@ -422,7 +422,7 @@ bool isNaming = false;
 //finished
 const char* gemini_ssid = "KMT's MOBILE";
 const char* gemini_password = "asdfghjkl";
-const char* gemini_api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
+const char* gemini_api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 const char* gemini_api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 bool notifyActive = false;
@@ -439,8 +439,6 @@ bool audioPlayerActive = false;
 void vibe(float seconds);
 void playWAV(const char* filename);
 void populateBrailleMaps();
-String convertToBrailleUnicode(int pattern);
-void printBrailleUnicode(int pattern);
 int readBraillePattern();
 void processBrailleInput(int pattern);
 void enterMode(AppMode newMode);
@@ -4451,36 +4449,8 @@ void populateBrailleMaps() {
   numberMap[26] = '0';
 }
 
-// Function to convert Braille pattern to UTF-8 Braille Unicode
-String convertToBrailleUnicode(int pattern) {
-  // Braille Unicode starts at U+2800
-  // Each dot corresponds to a bit position
-  uint16_t unicode = 0x2800 + pattern;
 
-  // Convert to UTF-8 encoding
-  String result = "";
-  if (unicode <= 0x7F) {
-    result += (char)unicode;
-  } else if (unicode <= 0x7FF) {
-    result += (char)(0xC0 | (unicode >> 6));
-    result += (char)(0x80 | (unicode & 0x3F));
-  } else {
-    result += (char)(0xE0 | (unicode >> 12));
-    result += (char)(0x80 | ((unicode >> 6) & 0x3F));
-    result += (char)(0x80 | (unicode & 0x3F));
-  }
 
-  return result;
-}
-
-void printBrailleUnicode(int pattern) {
-  String brailleChar = convertToBrailleUnicode(pattern);
-  Serial.print(brailleChar);
-}
-
-// UTF-8 Braille conversion
-String convertToBrailleUnicode(int pattern);
-void printBrailleUnicode(int pattern);
 
 int readBraillePattern() {
   int pattern = 0;
@@ -4504,20 +4474,16 @@ void processBrailleInput(int braillePattern) {
     playWAV("/TACTI_VISION_WAV/num.wav");
     vibe(0.2);
     Serial.print("[NUM]");
-    printBrailleUnicode(braillePattern);
   } else if (braillePattern == CAPITAL_INDICATOR_PATTERN) {
     isCapitalMode = true;
     playWAV("/TACTI_VISION_WAV/caps.wav");
     vibe(0.2);
     Serial.print("[CAP]");
-    printBrailleUnicode(braillePattern);
   } else {
     if (isNumberMode && numberMap.count(braillePattern)) {
       outputChar = numberMap[braillePattern];
       currentWord += outputChar;
       Serial.print(outputChar);
-      Serial.print(" ");
-      printBrailleUnicode(braillePattern);
 
       if (currentAppMode == PERKINS_MODE && hidKeyboardEnabled) {
         hidPrintChar(outputChar);
@@ -4531,8 +4497,6 @@ void processBrailleInput(int braillePattern) {
       }
       currentWord += outputChar;
       Serial.print(outputChar);
-      Serial.print(" ");
-      printBrailleUnicode(braillePattern);
 
       // *** Play alphabet audio for capital letters ***
       if (alphabetAudioEnabled && outputChar >= 'A' && outputChar <= 'Z') {
@@ -4548,8 +4512,6 @@ void processBrailleInput(int braillePattern) {
       outputChar = brailleMap[braillePattern];
       currentWord += outputChar;
       Serial.print(outputChar);
-      Serial.print(" ");
-      printBrailleUnicode(braillePattern);
 
       // *** Play alphabet audio for lowercase letters ***
       if (alphabetAudioEnabled && outputChar >= 'a' && outputChar <= 'z') {
